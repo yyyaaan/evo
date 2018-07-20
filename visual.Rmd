@@ -1,0 +1,46 @@
+---
+title: "Visulization"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+    df_print: kable
+    theme: 'paper'
+---
+
+```{r setup, echo=FALSE}
+library(tidyverse); library(DBI); library(odbc)
+con <- dbConnect(odbc::odbc(), "Study Database")
+data <- dbReadTable(con, "mobile")
+# value <- vapply(resolution$value, function(x) str_extract_all(x, "[0-9]{1,4}", simplify = T), FUN.VALUE = c("d1","d2"))
+# value <- release$value %>% map(~ parse_date(.x, "%b %d, %Y"))
+```
+
+# resolution
+
+```{r}
+resolution <- data %>% filter(key %in% c("Resolution"))
+value <- vapply(resolution$value, function(x) str_extract_all(x, "[0-9]{1,4}", simplify = T), FUN.VALUE = c("d1","d2"))
+value <- t(value)
+resolution$res1 <- value[,1] %>% as.numeric()
+resolution$res2 <- value[,2] %>% as.numeric()
+resolution$total.pixels <- resolution$res1 * resolution$res2
+
+release <- data %>% filter(key == "Release date")
+release$date <- parse_date(release$value, "%b %d, %Y")
+
+plotData1 <- merge(resolution, release, by = "id") %>% filter(!is.na(date) & date > as.Date("2010-01-01"))
+
+ggplot(plotData1, aes(x = date, y = total.pixels)) + 
+  geom_jitter()
+
+```
+
+
+# keys
+
+```{r}
+unique(data$key)
+```
