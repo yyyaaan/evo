@@ -8,9 +8,6 @@ con <- dbConnect(odbc::odbc(), "Study Database")
 # d <- dbReadTable(con, "mobile")
 # data <- readRDS("data.rds")
 
-unique(data$id) %>% length()
-unique(data$key) -> test
-
 
 # latest phones have error in announced date ------------------------------
 
