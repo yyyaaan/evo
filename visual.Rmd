@@ -11,36 +11,19 @@ output:
 ---
 
 ```{r setup, echo=FALSE}
-library(tidyverse); library(DBI); library(odbc)
-con <- dbConnect(odbc::odbc(), "Study Database")
-data <- dbReadTable(con, "mobile")
-# value <- vapply(resolution$value, function(x) str_extract_all(x, "[0-9]{1,4}", simplify = T), FUN.VALUE = c("d1","d2"))
-# value <- release$value %>% map(~ parse_date(.x, "%b %d, %Y"))
+library(plotly)
+data <- readRDS("dataOK.rds")
 ```
 
 # resolution
 
-```{r}
-resolution <- data %>% filter(key %in% c("Resolution"))
-value <- vapply(resolution$value, function(x) str_extract_all(x, "[0-9]{1,4}", simplify = T), FUN.VALUE = c("d1","d2"))
-value <- t(value)
-resolution$res1 <- value[,1] %>% as.numeric()
-resolution$res2 <- value[,2] %>% as.numeric()
-resolution$total.pixels <- resolution$res1 * resolution$res2
-
-release <- data %>% filter(key == "Release date")
-release$date <- parse_date(release$value, "%b %d, %Y")
-
-plotData1 <- merge(resolution, release, by = "id") %>% filter(!is.na(date) & date > as.Date("2010-01-01"))
-
-ggplot(plotData1, aes(x = date, y = total.pixels)) + 
-  geom_jitter()
-
+```{r resolution}
+ggplot(data, aes(x = the.release.date, y = the.total.pixels, color = as.factor(the.brand))) + 
+  geom_jitter() + 
+  theme(plot.subtitle = element_text(vjust = 1),
+        plot.caption = element_text(vjust = 1), 
+        legend.position = "none") +
+  labs(x = "release.date", y = "screen-total pixels") 
 ```
 
 
-# keys
-
-```{r}
-unique(data$key)
-```
