@@ -1,29 +1,49 @@
-library(tidyverse); library(plotly)
+library(tidyverse); library(hrbrthemes); library(gridExtra)
 data <- readRDS("dataOK.rds")
-myplot <- function(vector) plot_ly(data) %>% add_markers(x = 1:length(vector), y = vector)
+# myplot <- function(vector) plot_ly(data) %>% add_markers(x = 1:length(vector), y = vector)
+# ok plot are masked in function
+# RColorBrewer::display.brewer.all()
 
 
-# simple plots ------------------------------------------------------------
 
 
-ggplot(data, aes(x = the.release.date, y = the.total.pixels.group)) + 
-  geom_jitter() + geom_smooth()
+# process images ----------------------------------------------------------
 
-ggplot(data, aes(x = the.release.date, y = the.screen2body.percent)) + 
-  geom_jitter() + geom_smooth()
+plotScreens <- function(){
+  grid.arrange(
+    ggplot(data , aes(x = the.release.date, y = the.total.pixels.group)) + 
+      geom_jitter(color = "grey") + geom_smooth() + 
+      labs(x = "release date", y = "screen resolutions category", 
+           title = "Evolution of mobile phone screen", subtitle = "measured by screen resolutions") +
+      theme_ipsum_tw()
+    ,
+    ggplot(data, aes(x = the.release.date, y = the.screen2body.percent)) + 
+      geom_jitter(color = "grey") + geom_smooth() + 
+      labs(x = "release date", y = "screen-to-body ratio", title = " ",
+           subtitle = "by screen-to-body ratios") +
+      theme_ipsum_tw()
+    ,
+    ncol = 2
+  )
+}
 
+plotChips <- function(){
+  library(treemap)
+  data %>% 
+    select("id","the.systemchip.brand") %>%
+    na.omit() %>% 
+    count(the.systemchip.brand, sort = T) %>%
+    mutate(share = n / sum(n)) %>%
+    treemap(index = "the.systemchip.brand",
+            vSize = "share",
+            vColor = "share",
+            title = "Market Share of System Chipset by Brand",
+            type = "value",
+            palette = "GnBu",
+            fontfamily.title = "Titillium Web",
+            fontsize.title = 18)
+}
 
-# complicated plots -------------------------------------------------------
-
-options(stringsAsFactors = F)
-temp <- summary(na.omit(data$the.systemchip.brand)) / length(na.omit(data$the.systemchip.brand))
-temp <- data.frame(brand = names(temp), value = temp)
-temp <- temp[order(temp$value),]
-temp <- rbind(temp, c("others", sum(temp$value[1:14])))
-temp <- temp[15:nrow(temp),]
-ggplot(temp, aes("System Chip", y = as.numeric(value), fill = brand)) +
-  geom_col(width = 1) + coord_polar(theta = "y")
-remove(temp)
 
 # processed data ----------------------------------------------------------
 
