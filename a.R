@@ -5,8 +5,31 @@ data <- readRDS("dataOK.rds")
 # RColorBrewer::display.brewer.all()
 
 
+# new plots ---------------------------------------------------------------
+
+grid.arrange(
+  ggplot(data %>% filter(the.standby.hours < 1600), aes(x = the.release.date, y = the.standby.hours)) + 
+    geom_jitter(color = "grey") + geom_smooth() + 
+    labs(x = "release date", y = "standby time (hours)",
+         title = "Evolution of mobile phone hardware (group 2)",
+         subtitle = "by standby time") +
+    theme_ipsum_tw()
+  ,
+  ggplot(data %>% filter(the.weight.gram < 1000), aes(x = the.release.date, y = the.weight.gram)) + 
+    geom_jitter(color = "grey") + geom_smooth() + 
+    labs(x = "release date", y = "phone weight (gram)", title = " ",
+         subtitle = "by weight") +
+    theme_ipsum_tw()
+  ,
+  ncol = 2
+)
 
 
+
+
+
+
+ 
 # process images ----------------------------------------------------------
 
 plotScreens <- function(){
@@ -14,13 +37,25 @@ plotScreens <- function(){
     ggplot(data , aes(x = the.release.date, y = the.total.pixels.group)) + 
       geom_jitter(color = "grey") + geom_smooth() + 
       labs(x = "release date", y = "screen resolutions category", 
-           title = "Evolution of mobile phone screen", subtitle = "measured by screen resolutions") +
+           title = "Evolution of mobile phone hardware", subtitle = "measured by screen resolutions") +
       theme_ipsum_tw()
     ,
     ggplot(data, aes(x = the.release.date, y = the.screen2body.percent)) + 
       geom_jitter(color = "grey") + geom_smooth() + 
       labs(x = "release date", y = "screen-to-body ratio", title = " ",
            subtitle = "by screen-to-body ratios") +
+      theme_ipsum_tw()
+    ,
+    ggplot(data %>% filter(the.camera.megapixels < 40), aes(x = the.release.date, y = the.camera.megapixels)) + 
+      geom_jitter(color = "grey") + geom_smooth() + 
+      labs(x = "release date", y = "Camera (megapixels)", title = " ",
+           subtitle = "by camera") +
+      theme_ipsum_tw()
+    ,
+    ggplot(data %>% filter(the.ram.gb < 9), aes(x = the.release.date, y = the.ram.gb)) + 
+      geom_jitter(color = "grey") + geom_smooth() + 
+      labs(x = "release date", y = "System Memory - RAM (GB)", title = " ",
+           subtitle = "by system memory") +
       theme_ipsum_tw()
     ,
     ncol = 2
@@ -46,6 +81,14 @@ plotChips <- function(){
 
 
 # processed data ----------------------------------------------------------
+
+weightNcamera <- function(){
+  data$the.weight.gram <- data$Weight %>% str_extract("[0-9]{2,4} g") %>% str_extract("[0-9]{2,4}") %>% as.numeric()
+  data$the.camera.megapixels <- data$Camera %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
+  data$the.ram.gb <- data$System.memory %>% str_extract("[0-9]*\\.?[0-9]* GB RAM") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
+  data$the.standby.hours <- data$Stand.by.time %>% str_extract("[0-9]*\\.?[0-9]* hours") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
+  saveRDS(data, "dataOK.rds")
+}
 
 cleanSystemChip <- function(){
   data$the.systemchip.brand <- data$System.chip %>% word()
