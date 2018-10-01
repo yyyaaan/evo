@@ -1,4 +1,4 @@
-library(tidyverse); library(hrbrthemes); library(gridExtra)
+library(tidyverse); library(hrbrthemes); library(gridExtra); library(scales)
 data <- readRDS("dataOK.rds")
 # myplot <- function(vector) plot_ly(data) %>% add_markers(x = 1:length(vector), y = vector)
 # ok plot are masked in function
@@ -7,56 +7,81 @@ data <- readRDS("dataOK.rds")
 
 # new plots ---------------------------------------------------------------
 
-grid.arrange(
-  ggplot(data %>% filter(the.standby.hours < 1600), aes(x = the.release.date, y = the.standby.hours)) + 
-    geom_jitter(color = "grey") + geom_smooth() + 
-    labs(x = "release date", y = "standby time (hours)",
-         title = "Evolution of mobile phone hardware (group 2)",
-         subtitle = "by standby time") +
-    theme_ipsum_tw()
-  ,
-  ggplot(data %>% filter(the.weight.gram < 1000), aes(x = the.release.date, y = the.weight.gram)) + 
-    geom_jitter(color = "grey") + geom_smooth() + 
-    labs(x = "release date", y = "phone weight (gram)", title = " ",
-         subtitle = "by weight") +
-    theme_ipsum_tw()
-  ,
-  ncol = 2
-)
+colnames(data)
+a <- data$Talk.time %>% str_extract("[0-9]*\\.?[0-9]* hours") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
+plot(data$the.release.date, a)
+
+
+  # illustrate the evolution patterns
+ggplot(data , aes(x = the.release.date, y = the.total.pixels)) + 
+  geom_point() +
+  labs(x = "release date", y = "screen resolutions category") +
+  scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+  theme_ipsum_tw() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
 
 
+# 2 evolution trend -------------------------------------------------------
 
 
- 
-# process images ----------------------------------------------------------
-
-plotScreens <- function(){
+plotTrendA <- function(){
   grid.arrange(
     ggplot(data , aes(x = the.release.date, y = the.total.pixels.group)) + 
-      geom_jitter(color = "grey") + geom_smooth() + 
+      geom_jitter(shape = 42) + geom_smooth() + 
       labs(x = "release date", y = "screen resolutions category", 
-           title = "Evolution of mobile phone hardware", subtitle = "measured by screen resolutions") +
-      theme_ipsum_tw()
+           title = "Evolution of mobile phone hardware (group 1)", subtitle = "measured by screen resolutions") +
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
     ,
     ggplot(data, aes(x = the.release.date, y = the.screen2body.percent)) + 
-      geom_jitter(color = "grey") + geom_smooth() + 
+      geom_jitter(shape = 42) + geom_smooth() + 
       labs(x = "release date", y = "screen-to-body ratio", title = " ",
            subtitle = "by screen-to-body ratios") +
-      theme_ipsum_tw()
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
     ,
     ggplot(data %>% filter(the.camera.megapixels < 40), aes(x = the.release.date, y = the.camera.megapixels)) + 
-      geom_jitter(color = "grey") + geom_smooth() + 
+      geom_jitter(shape = 42) + geom_smooth() + 
       labs(x = "release date", y = "Camera (megapixels)", title = " ",
            subtitle = "by camera") +
-      theme_ipsum_tw()
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
     ,
     ggplot(data %>% filter(the.ram.gb < 9), aes(x = the.release.date, y = the.ram.gb)) + 
-      geom_jitter(color = "grey") + geom_smooth() + 
+      geom_jitter(shape = 42) + geom_smooth() + 
       labs(x = "release date", y = "System Memory - RAM (GB)", title = " ",
            subtitle = "by system memory") +
-      theme_ipsum_tw()
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+    ,
+    ncol = 2
+  )
+}
+
+plotTrendB <- function(){
+  grid.arrange(
+    ggplot(data %>% filter(the.standby.hours < 1600), aes(x = the.release.date, y = the.standby.hours)) + 
+      geom_jitter(shape = 42) + geom_smooth() + 
+      labs(x = "release date", y = "standby time (hours)",
+           title = "Evolution of mobile phone hardware (group 2)",
+           subtitle = "by standby time") +
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+    ,
+    ggplot(data %>% filter(the.weight.gram < 1000), aes(x = the.release.date, y = the.weight.gram)) + 
+      geom_jitter(shape = 42) + geom_smooth() + 
+      labs(x = "release date", y = "phone weight (gram)", title = " ",
+           subtitle = "by weight") +
+      scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+      theme_ipsum_tw() +
+      theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
     ,
     ncol = 2
   )
@@ -128,9 +153,12 @@ sceenSpecs <- function(){
 }
 
 releaseDateNbrand <- function(){
+  data$the.brand <- data$phoneName %>% word(1,1)
   data$Release.date[2825] <- "Jun  6, 2011" #correct erros
   data$the.release.date <- data$Release.date %>%parse_date("%b %d, %Y")
-  data$the.brand <- data$phoneName %>% word(1,1)
+  x <- data$Announce %>% parse_date("%b %d, %Y")
+  data$the.release.date[!is.na(x)] <- x[!is.na(x)]
+  data$the.release.year <- data$the.release.date %>% format("%Y") %>% as.numeric()
 }
 
 saveDatasets <- function(){
