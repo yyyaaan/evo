@@ -1,26 +1,50 @@
-library(tidyverse); library(hrbrthemes); library(gridExtra); library(scales)
+library(tidyverse); library(hrbrthemes); library(gridExtra); 
+library(scales); library(visNetwork)
+options(stringsAsFactors = F)
 data <- readRDS("dataOK.rds")
 # myplot <- function(vector) plot_ly(data) %>% add_markers(x = 1:length(vector), y = vector)
 # ok plot are masked in function
 # RColorBrewer::display.brewer.all()
 
 
-# new plots ---------------------------------------------------------------
+
+# pendings ----------------------------------------------------------------
+
 
 colnames(data)
 a <- data$Talk.time %>% str_extract("[0-9]*\\.?[0-9]* hours") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
 plot(data$the.release.date, a)
 
 
-  # illustrate the evolution patterns
-ggplot(data , aes(x = the.release.date, y = the.total.pixels)) + 
-  geom_point() +
-  labs(x = "release date", y = "screen resolutions category") +
-  scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
-  theme_ipsum_tw() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# Network Graphs ----------------------------------------------------------
+
+plotNetwork <- function(){
+  nodes <- data$the.systemchip.brand %>% as.character() %>%
+    na.omit() %>%
+    unique() %>%
+    c(unique(data$the.brand))
+  nodes <- data.frame(id = 1:length(nodes), 
+                      label = nodes,
+                      shape = "dot")
+  N <- 660
+  edges <- data.frame(from = ceiling(runif(N) * 145),
+                      to = ceiling(runif(N) * 145))
+  visNetwork(nodes, edges)
+}
 
 
+# Evolution Pattern with out labels ---------------------------------------
+
+
+plotEvoPattern <- function(){
+  ggplot(data , aes(x = the.release.date, y = the.total.pixels)) + 
+    geom_point() +
+    labs(x = "release date", y = "screen resolutions - total pixels", 
+         title = "Evolution evidence for mobile phones", subtitle = "measured by screen resolutions / non-transformed data") +
+    scale_x_date(date_breaks = "1 year", labels = date_format("%Y")) +
+    theme_ipsum_tw() +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+}
 
 
 # 2 evolution trend -------------------------------------------------------
