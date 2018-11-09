@@ -1,4 +1,3 @@
-%%%%%%%%%%%%%% The following has been modified for JSBE %%%%%%%%%%%%%%%%
 % use search for changes, below contains the originals
 % \renewcommand{\baselinestretch}{1.43}  
 % \setlength\parindent{0em}
@@ -9,13 +8,12 @@
 
 % \RequirePackage[authordate,backend=biber,sortlocale=\gradu@sortlocale,noibid]{biblatex-chicago}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Originally written by Antti-Juhani Kaijanaho on December 2002.
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 % Currently maintained by Antti-Juhani Kaijanaho <antti-juhani.kaijanaho@jyu.fi>
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -197,7 +195,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% BASIC FORMATTING
 
-\renewcommand{\baselinestretch}{1.03}  
+\renewcommand{\baselinestretch}{1.43}  
 \setlength\parindent{2em}
 \setlength\parskip{1pt}
 \ifgradu@stdbib
