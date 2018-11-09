@@ -6,7 +6,9 @@ data <- readRDS("dataOK.rds")
 # ok plot are masked in function
 # RColorBrewer::display.brewer.all()
 
-
+data$the.release.date %>% na.omit() %>% min()
+nrow(data)
+summary(data[,169:171]) %>% xtable()
 
 # pendings ----------------------------------------------------------------
 
@@ -121,7 +123,7 @@ plotChips <- function(){
     treemap(index = "the.systemchip.brand",
             vSize = "share",
             vColor = "share",
-            title = "Market Share of System Chipset by Brand",
+            title = "",
             type = "value",
             palette = "GnBu",
             fontfamily.title = "Titillium Web",
