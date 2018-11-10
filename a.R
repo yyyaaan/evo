@@ -8,14 +8,37 @@ data <- readRDS("dataOK.rds")
 
 data$the.release.date %>% na.omit() %>% min()
 nrow(data)
-summary(data[,169:171]) %>% xtable()
 
 # pendings ----------------------------------------------------------------
 
+complete.cases(data[,162:172]) %>% sum()
 
 colnames(data)
 a <- data$Talk.time %>% str_extract("[0-9]*\\.?[0-9]* hours") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
 plot(data$the.release.date, a)
+
+
+# normality ---------------------------------------------------------------
+
+par(mfrow = c(3,2))
+qqnorm(rnorm(8020), main = "Theoretical normal distribution")
+abline(0,1, col = "red")
+qqnorm(scale(data$the.camera.megapixels), main = "Normalized Camera Resolution")
+abline(0,1, col = "red")
+qqnorm(scale(data$the.ram.gb), main = "Normalized RAM")
+abline(0,1, col = "red")
+qqnorm(scale(data$the.standby.hours), main = "Normalized Stand-by Hours")
+abline(0,1, col = "red")
+qqnorm(scale(data$the.weight.gram), main = "Normalized Weight")
+abline(0,1, col = "red")
+qqnorm(scale(data$the.screen2body.percent), main = "Normalized Screen-to-Body Ratio")
+abline(0,1, col = "red")
+
+ks.test(scale(data$the.camera.megapixels), pnorm)
+ks.test(scale(data$the.ram.gb), pnorm)
+ks.test(scale(data$the.standby.hours), pnorm)
+ks.test(scale(data$the.weight.gram), pnorm)
+ks.test(scale(data$the.screen2body.percent), pnorm)
 
 
 # Network Graphs ----------------------------------------------------------
@@ -194,3 +217,22 @@ saveDatasets <- function(){
   dbWriteTable(con, "mobile", data, overwrite = T)
 }
 
+
+# others ------------------------------------------------------------------
+
+summary(data[,169:171]) %>% xtable::xtable()
+
+df <- data[,162:171]
+df.new <- data.frame(description = "integer",
+                     variable.name = colnames(df),
+                     available.cases = 0,
+                     percent = 0,
+                     explanation = "hello")
+
+for (i in 1:ncol(df)) {
+  n <- sum(complete.cases(df[,i]))
+  df.new$available.cases[i] <- n 
+  df.new$percent[i] <- n / nrow(df)
+}
+
+xtable::xtable(df.new)
