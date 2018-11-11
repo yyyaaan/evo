@@ -6,6 +6,7 @@
 \usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
 \addbibresource{ref.bib} 
 \graphicspath{{charts/}}
+\renewcommand{\baselinestretch}{1.09} 
 
 \begin{document}
 
@@ -83,6 +84,8 @@ The major challenge proceeding the VUCA nature of the mobile phone industry is t
 
 Mobile phone industry features for its fast moving and ever-emerging innovations. The competition landscape has greatly changed in last few years despite the significant concentration, where two dominant vendors, Apple and Samsung, being in top-selling list for almost a decade according to IDC and Gartner market researches. Nevertheless, the development in the industry has enabled the increasing market capacity and lowered the entry barrier considerably. While the major players dominate the main-stream markets, especially in middle-to-high end, the mobile phone industry witnessed the growth of small-to-medium vendors in rewarding niche and/or sub markets.
 
+\section{Complexity in the VUCA Environment}
+
 For an individual mobile phone vendor, its innovation capacity is bounded by the availability and technical limitations of major components supplied by third parties. Later chapters will discuss about the evolution and coevolution in the sense of complexity theory, aiming to address the VUCA within mobile phone industry's. As an introduction to VUCA, an interesting fact observed in the industry is first analyzed.
 
 The mobile phone industry features a potentially astonishing phenomenon that top echelon executives' personal taste and ambition greatly influences the innovation development path. Monetary rewards are usually assumed to be the fundamental motivation in entrepreneurship; however, such motivation does not apply to all decision makers in mobile phone industries. A note-worthy observation is Smartisan with its CEO, Mr. Luo, who claims that the concept of Smartisan is the feelings. In the domain of user interaction, interface and experience (UI, UX) innovation, after years of major design trend changed from skeuomorphism to flat and material design lead by Google and Apple during 2012 to 2014 (\cite{burmistrov2015flat}), Mr. Luo proudly insists skeumorphic design that replicating three-dimensional real world objects even in Smartisan's recent release in mid-2018. Similar actions can be observed from Smartisan product line in terms of phone shape, coloring, processing and manufacturing characteristics. Additionally to the design preferences, entrepreneur's ambition would structure the development path and product line especially within an SME. There have been various examples that a mobile phone vendor extends its area into other consumer electronics, and the reverse is also true, for example Microsoft's ambition to expand in mobile phones. The benefits of such taste and ambition could lead to a successful niche market participant that does not pursue main-stream fashion, while the potential hindrance shall include failure in locating major market demands, negligence of major business opportunity, distracted focus and over-investment in R\&D, etc. There are various established theories discussing the correlation between organizational outcomes and executives' backgrounds, especially the upper echelons theory published by \citeauthor{hambrick1984upper} (\citeyear{hambrick1984upper}). This paper will not extend to (reductionism) managerial theory as such, and the evidence from mobile phone industry implies that not only managerial experiences but also other personal characteristics would have influenced the mobile phone brand. A manager may be viewed as a genius prophet or a market-blind arrogant one due to her/his ambition and preferences, whereas the impossibility of foreseeing the outcome persists until the competitive market proves it.
@@ -98,9 +101,15 @@ While there are various factors affecting the design, structure and technical sp
 
 A further layer of innovation complexity comes from the orientation of innovation. Traditionally, software user-friendliness development and hardware technology advancement are two main innovation directions in the mobile phone industry, but a trivial trend has stemmed that companies heavily leverage in user-tracking and mass-data-collection, where behavioral analysis seems to be a non-trivial task in production innovation cycles. Furthermore, subscription-based (software) cloud service seem coincide has activated the increasing need for user behavioral information, either in an ethical or unethical way. emergence of ad-supported mobile phone operating systems has further strengthened the efforts in user-tracking for precise marketing in exchange for subscription-style super-revenue/profits. 
 
-To summarize the VUCA charateristics, \textbf{volatility} in the mobile phone industry is partially a consequent of technology innovation while it is also highly related to the frequent changes in end users’ preferences. On a given time and even in a specified market, the existence of vast variation in mobile phones design and specifications is an indication of the industry volatility. \textbf{Uncertainty} describes the challenges in foreseeing the industry trend, forecasting demands, assurance of successful R\&D progress and all other factors in supply chains, sales channels, macroeconomics in addition to manufactures themselves; succeeding paragraphs shall discuss more. \textbf{Complexity} reflects the interconnecting, nonlinear, multidimensional and multileveled network systems within the industry. \textbf{Ambiguity} mainly originates from the nonlinear causality, where one cannot simply conclude certain actions surely leads to specific results. The mobile phone with most advanced technology does not necessarily to be a top seller, and the top seller might not contain any technical highlights. Ambiguity is also partially endogenous characteristics of the industry. The boundary between mobile phones, tablets, laptops has become increasingly ambiguous, and meanwhile the technology development paths behind are rather cross-boundary.
+To summarize the VUCA charateristics, \textbf{volatility} in the mobile phone industry is partially a consequent of technology innovation while it is also highly related to the frequent changes in end users’ preferences. On a given time and even in a specified market, the existence of vast variation in mobile phones design and specifications is an indication of the industry volatility. \textbf{Uncertainty} describes the challenges in foreseeing the industry trend, forecasting demands, assurance of successful R\&D progress and all other factors in supply chains, sales channels, macroeconomics in addition to manufactures themselves; succeeding paragraphs shall discuss more. \textbf{Complexity} reflects the interconnecting, nonlinear, multidimensional and multileveled network systems within the industry. \textbf{Ambiguity} mainly originates from the nonlinear causality, where one cannot simply conclude certain actions surely leads to specific results. The mobile phone with most advanced technology does not necessarily to be a top seller, and the top seller might not contain any technical highlights. Ambiguity is also partially endogenous characteristics of the industry. The boundary between mobile phones, tablets, laptops has become increasingly ambiguous, and meanwhile the technology development paths behind are rather cross-disciplinary.
 
-\chapter{Data and Methodology}
+\section{Adaption: From Innovation to Evolution }
+
+Evolution is non-linear sequence of differentiating, selecting/picking and amplifying, while innovation is the major source of evolution such that innovation occurs in each sub-process of evolution. Similar to the statement that gene mutation and genetic variation are essential in ecological evolution, innovation and commitments to R\&D are key for business evolution. Furthermore, evolution describes a collective population behavior and innovation is an action that an individual can undertake.
+
+In the context of complexity theory, evolution is a common terminology describing the gradual changes in a complex system. The fundamental differences between evolution and innovation in mobile phone industry, a complex adaptive system, is that evolution precisely defines the system-wide changes and innovation serves only as a part, a necessary procedure and sometimes an outcome of evolution. An industrial evolution requires not only innovation but also the interaction among different parties inside and outside the industry system. An illustrative way to understand evolution is to view the improvement (or more precisely, change, as it may not always be superior to the previous) in mobile phones are the observable outcome of the procedures that involves technology innovation, adoption and diffusion.
+
+\chapter{Data and Quantitative Methodology}
 
 \section{Data and Information Processing}
 
@@ -109,14 +118,14 @@ The complex analysis is based on mobile phone data collected from public informa
 The great dimensionality of the data not only provides a huge potential for quantitative analysis but also arises significant challenges in terms of rigorous statistical methodologies. The properties of data prohibits the use of commonly adapted (generalized) linear regression model; such characteristics include,
 
 \begin{enumerate}
-    \item Multicollinearity in data violates the linear model on the fundamental statistical assumptions. (\cite{farrar1967multicollinearity}). Clearly, many measures are either directly or indirectly linearly dependent by nature. A specific example is that the capacity of battery and screen sizes are approximately linear factors that contributes to the stand-by time and talking time. 
-    \item The distribution of data is long-tailed, unbounded and does not follow normal distribution (for statistical definition and numeric proof, see Appendix \ref{app: normality}).
-    \item Regression analysis, as a classical method, is not designed for the explosive dimensions, and the curses and blessings simultaneously occur because of dimensionality (\cite{donoho2000high}).
+    \item Multicollinearity in linear model for the underlying data can be expected due to correlation, which is against on the fundamental statistical assumptions. (\cite{farrar1967multicollinearity}). Clearly, many measures are either directly or indirectly linearly dependent by nature. A specific example is that the capacity of battery and screen sizes are approximately linear factors that contributes to the stand-by time and talking time. 
+    \item The distribution of data is long-tailed, unbounded and does not follow normal distribution (for statistical definition and numeric proof, see Appendix \ref{app:normality}). Even though the observations are sufficiently large in size, the Central Limit Theorem and normal approximation cannot be applied because of the interdependence, non-random sampling and non-normal population in both theoretical and empirical evidence.
+    \item Regression analysis, as a classical method, is not designed for the explosive dimensions, and the curses and blessings simultaneously occur in high dimensionality (\cite{donoho2000high}).
     \item Nonlinearity and multidirectional causality (as in the previous chapters) would invalidate the selection of dependent and independent variable, and these two industrial features could not be resolved by classical modelling.
-    \item Non-parametric and semi-parametric methods are sufficient for pattern recognition with fewer statistical assumptions needed.
+    \item Data mining techniques are sufficient for pattern recognition with fewer statistical assumptions needed.
 \end{enumerate}
 
-The currently research utilized only a proportion of all available data, and the choice of dimensions are based solely on the significance and dominance of technical specifications that impact on end-user experience. Though the utilization of the full data become lower, such processing allows more reliable and informative quantitative analysis as detailed in the section below. Table \ref{tbl: vars} outlines the main data used for detailed analysis and appendix \ref{app: data summary} provides further summary statistics.
+The currently research utilized only a proportion of all available data, and the choice of dimensions are based solely on the significance and dominance of technical specifications that impact on end-user experience. Though the utilization of the full data become lower, such processing allows more reliable and informative quantitative analysis as detailed in the section below. Table \ref{tbl: vars} outlines the main data used for detailed analysis and appendix \ref{app:data summary} provides further summary statistics.
 
 \begin{table}[ht]
 \label{tbl: vars}
@@ -148,7 +157,7 @@ Except for necessary data type correction and formatting, there is minimal manip
 
 The research mainly utilizes data mining approach, where exploratory statistics serves a major role to illustrate the findings within the context of complex adaptive systems. Unlike commonly adopted (generalized) linear regression methodology, the hybrid approach used in this thesis mainly relies on the non-parametric methods that reflect the nature of complex analysis by laying more emphasis on facts and market behaviors instead of causal modelling, and furthermore, they are fully compatible with data properties. In addition to the challenges in data properties, another issue exhibits in missing values. The complete cases (with all 161 dimensions available and valid) are technically 0, and even with the focused subset (11 processed dimensions) the complete cases only counts for 10.8\%. This problem is solved by utilizing available case analysis, using all available data in a specific statistical model. A specific application can be using all non-missing mobile phone screen resolution when analyzing the quality of display, but the set used for this analysis can be different from the set for evaluating phone stand-by time. Given the data described, available cases analysis has significant merits over complete case analysis (e.g. \cite{kim1977treatment}) at possible cost of consistency. Further discussion on missing data handling can be found for example \citeauthor{little2014statistical} (\citeyear{little2014statistical}) and \citeauthor{pigott2001review} (\citeyear{pigott2001review}), and it is beyond the domain of this thesis.
 
-The data collection procedure, data processing and quantitative analysis is implemented using \texttt{R}, a popular statistical programming language, and the \texttt{R}-package \textit{dplyr} (\cite{dplyr}) greatly ease the task of data manipulation.
+The data collection procedure, data processing and quantitative analysis is implemented using \texttt{R}, a popular statistical programming language, and the \texttt{R}-package \texttt{dplyr} (\cite{dplyr}) greatly ease the task of data manipulation.
 
 \section{Assumptions and Research Questions}
 
@@ -168,10 +177,6 @@ The main purpose of this thesis is to enhance the understanding of complex adapt
 \chapter{Findings}
 
 \section{From Innovation to Evolution}
-
-Evolution is non-linear sequence of differentiating, selecting/picking and amplifying, while innovation is the major source of evolution such that innovation occurs in each sub-process of evolution. Similar to the statement that gene mutation and genetic variation are essential in ecological evolution, innovation and commitments to R\&D are key for business evolution. Furthermore, evolution describes a collective population behavior and innovation is an action that an individual can undertake.
-
-In the context of complexity theory, evolution is a common terminology describing the gradual changes in a complex system. The fundamental differences between evolution and innovation in mobile phone industry, a complex adaptive system, is that evolution precisely defines the system-wide changes and innovation serves only as a part, a necessary procedure and sometimes an outcome of evolution. An industrial evolution requires not only innovation but also the interaction among different parties inside and outside the industry system. An illustrative way to understand evolution is to view the improvement (or more precisely, change, as it may not always be superior to the previous) in mobile phones are the observable outcome of the procedures that involves technology innovation, adoption and diffusion.
 
 \begin{figure}[htb]
     \centering
@@ -293,68 +298,90 @@ A further extension to this research can be advanced quantitative methodologies 
 
 \appendix
 
-\section{Summary and Selected Data}
-\label{app: data summary}
+\section{Selected Data Summary}
+\label{app:data summary}
+\begin{verbatim}
+ the.total.pixels  the.screen2body.percent the.weight.gram 
+ Min.   :     96   Min.   : 4.90           Min.   :  42.0  
+ 1st Qu.:  38720   1st Qu.:30.11           1st Qu.:  95.0  
+ Median :  96000   Median :52.45           Median : 120.0  
+ Mean   : 471940   Mean   :48.82           Mean   : 143.4  
+ 3rd Qu.: 518400   3rd Qu.:65.77           3rd Qu.: 150.0  
+ Max.   :8294400   Max.   :87.04           Max.   :2650.0  
+ NA's   :382       NA's   :2229            NA's   :1175    
+ 
+ the.camera.megapixels   the.ram.gb     the.standby.hours
+ Min.   : 0.100        Min.   : 0.004   Min.   :  10.0   
+ 1st Qu.: 1.300        1st Qu.: 0.500   1st Qu.: 216.0   
+ Median : 3.200        Median : 1.000   Median : 300.0   
+ Mean   : 4.768        Mean   : 1.258   Mean   : 352.1   
+ 3rd Qu.: 8.000        3rd Qu.: 2.000   3rd Qu.: 432.0   
+ Max.   :41.000        Max.   :16.000   Max.   :3000.0   
+ NA's   :1164          NA's   :4075     NA's   :2174     
+\end{verbatim}
+
+
+\section{Correlation Matrix}
+\label{app:corr}
+
+The correlation matrix measures how dependent between two given variables. Due to missing values, the matrices are calculated based on the available cases analysis, meaning that pairwise available cases are always used to full potential. Be aware that the non-normality of the data makes Pearson's Correlation less meaningful for violating implicit statistical assumption, and Spearman's Correlation is still compatible and meaningful. The correlations are achieved correspondingly in \texttt{R} with base function (\cite{RBase}) as following.
+
+\begin{verbatim}
+    # var1 = "the.total.pixels"
+    # var2 = "the.screen2body.percent"
+    # var3 = "the.weight.gram"
+    # var4 = "the.camera.megapixels"
+    # var5 = "the.ram.gb"
+    # var6 = "the.standby.hours"
+    cor(data, use = "pairwise.complete.obs", method = "spearman")
+    cor(data, use = "pairwise.complete.obs", method = "pearson")
+\end{verbatim}
 
 \begin{table}[ht]
+\caption{Spearman's Correlation}
 \centering
-\begin{tabular}{rllll}
+\begin{tabular}{rrrrrrr}
   \hline
- & the.total.pixels & the.release.date &  the.brand & the.screen2body.percent \\ 
+ & var1 & var2 & var3 & var4 & var5 & var6 \\ 
   \hline
-- & Min.   :     96   & Min.   :2001-06-05   & Length:8020        & Min.   : 4.90   \\ 
- - & 1st Qu.:  38720   & 1st Qu.:2009-03-31   & Class :character   & 1st Qu.:30.11   \\ 
-  - & Median :  96000   & Median :2011-10-11   & Mode  :character   & Median :52.45   \\ 
-  - & Mean   : 471940   & Mean   :2011-11-25   &  & Mean   :48.82   \\ 
-  - & 3rd Qu.: 518400   & 3rd Qu.:2015-01-04   &  & 3rd Qu.:65.77   \\ 
-  - & Max.   :8294400   & Max.   :2018-06-28   &  & Max.   :87.04   \\ 
-  - & NA's   :382   & NA's   :4066   &  & NA's   :2229   \\ 
+var1 & 1.0000 & 0.9421 & 0.7858 & 0.8887 & 0.8945 & 0.2617 \\ 
+  var2 & 0.9421 & 1.0000 & 0.7608 & 0.8525 & 0.8389 & 0.1341 \\ 
+  var3 & 0.7858 & 0.7608 & 1.0000 & 0.6913 & 0.5280 & 0.1166 \\ 
+  var4 & 0.8887 & 0.8525 & 0.6913 & 1.0000 & 0.8128 & 0.2741 \\ 
+  var5 & 0.8945 & 0.8389 & 0.5280 & 0.8128 & 1.0000 & 0.2232 \\ 
+  var6 & 0.2617 & 0.1341 & 0.1166 & 0.2741 & 0.2232 & 1.0000 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[ht]
+\caption{Pearson's Correlation}
 \centering
-\begin{tabular}{rlll}
+\begin{tabular}{rrrrrrr}
   \hline
- & the.total.pixels.group & the.systemchip.brand & the.weight.gram \\ 
+ & var1 & var2 & var3 & var4 & var5 & var6 \\ 
   \hline
-- & Min.   :1.000   & Qualcomm:1326   & Min.   :  42.0   \\ 
-  - & 1st Qu.:1.000   & MediaTek: 852   & 1st Qu.:  95.0   \\ 
-  - & Median :1.000   & Intel   : 104   & Median : 120.0   \\ 
-  - & Mean   :1.733   & Samsung : 102   & Mean   : 143.4   \\ 
-  - & 3rd Qu.:2.000   & TI      :  96   & 3rd Qu.: 150.0   \\ 
-  - & Max.   :5.000   & (Other) : 306   & Max.   :2650.0   \\ 
-  - & NA's   :382   & NA's    :5234   & NA's   :1175   \\ 
-   \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[ht]
-\centering
-\begin{tabular}{rlll}
-  \hline
- & the.camera.megapixels &   the.ram.gb & the.standby.hours \\ 
-  \hline
-- & Min.   : 0.100   & Min.   : 0.004   & Min.   :  10.0   \\ 
-  - & 1st Qu.: 1.300   & 1st Qu.: 0.500   & 1st Qu.: 216.0   \\ 
-  - & Median : 3.200   & Median : 1.000   & Median : 300.0   \\ 
-  - & Mean   : 4.768   & Mean   : 1.258   & Mean   : 352.1   \\ 
-  - & 3rd Qu.: 8.000   & 3rd Qu.: 2.000   & 3rd Qu.: 432.0   \\ 
-  - & Max.   :41.000   & Max.   :16.000   & Max.   :3000.0   \\ 
-  - & NA's   :1164   & NA's   :4075   & NA's   :2174   \\ 
+var1 & 1.0000 & 0.6646 & 0.4599 & 0.7580 & 0.7863 & 0.2122 \\ 
+  var2 & 0.6646 & 1.0000 & 0.3998 & 0.7430 & 0.6094 & 0.1400 \\ 
+  var3 & 0.4599 & 0.3998 & 1.0000 & 0.2362 & 0.2240 & 0.2093 \\ 
+  var4 & 0.7580 & 0.7430 & 0.2362 & 1.0000 & 0.7150 & 0.2263 \\ 
+  var5 & 0.7863 & 0.6094 & 0.2240 & 0.7150 & 1.0000 & 0.1842 \\ 
+  var6 & 0.2122 & 0.1400 & 0.2093 & 0.2263 & 0.1842 & 1.0000 \\ 
    \hline
 \end{tabular}
 \end{table}
 
 \section{Non-normality of Obeservations}
-\label{app: normality}
+\label{app:normality}
 
 The normality of numeric subset of data is tested in two methods, visual and test-statistical method. The visual test is built upon Quantile-Quantile (Q-Q) plot, which is designed for and commonly used in comparing two underlying distributions in a non-parametric manner (originally \cite{wilk1968probability}). The red line the Q-Q plots (Figure \ref{fig:qqplots}) denotes the theoretic normal distribution and each points represented a scaled and centered ("standardized") observed value. If the observations are roughly normally distributed, the standardized value should lay evenly along the red lines. With a reference to the simulated normal distribution in first graph in Figure \ref{fig:qqplots}, the strong deviation from theoretical normal distribution can be obviously noted, asserting the non-normality of data.
 
 The non-normality can be further verified by One-Sample Kolmogorov-Smirnov test. The hypothesis test has a null hypothesis such that the sample is drawn from the reference distribution (fixed to normal distribution), and it has been done in \texttt{R} with \texttt{ks.text(scale(data), qnorm)} function. 
 
 \begin{verbatim}
+data:  scale(the.total.pixels)
+D = 0.26688, p-value < 2.2e-16
+
 data:  scale(the.camera.megapixels)
 D = 0.2177, p-value < 2.2e-16
 
@@ -375,11 +402,12 @@ The test result strongly against the null hypothesis with all $p$-value $< 0.001
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.95\textwidth]{qqplots.png}
+    \includegraphics[width=0.85\textwidth]{qqplots.png}
     \caption{Quantile-Quantile Plot of Observations agains Normal Distribution}
     \label{fig:qqplots}
 \end{figure}
 
+Shapiro-Wilk test, another powerful normality test, is not powerful enough to handle the data in question with 8020 observation, and thus skipped. As common practice, QQ-plots and/or appropriated Kolmogorov-Simrnov tests are reliable and sufficient to assert on normality, especially provided with the strong test statistics with the underlying data. Further discussion and in-depth statistical researches on normality can be found for example \citeauthor{ghasemi2012normality} (\citeauthor{ghasemi2012normality}).
 
 \section{Statistical Note on Selected Graphs}
 \label{app:stats note}

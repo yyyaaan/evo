@@ -6,39 +6,67 @@ data <- readRDS("dataOK.rds")
 # ok plot are masked in function
 # RColorBrewer::display.brewer.all()
 
-data$the.release.date %>% na.omit() %>% min()
-nrow(data)
-
 # pendings ----------------------------------------------------------------
 
-complete.cases(data[,162:172]) %>% sum()
-
-colnames(data)
-a <- data$Talk.time %>% str_extract("[0-9]*\\.?[0-9]* hours") %>% str_extract("[0-9]*\\.?[0-9]*") %>% as.numeric()
-plot(data$the.release.date, a)
 
 
-# normality ---------------------------------------------------------------
+# verbatim output ---------------------------------------------------------
 
-par(mfrow = c(3,2))
-qqnorm(rnorm(8020), main = "Theoretical normal distribution")
-abline(0,1, col = "red")
-qqnorm(scale(data$the.camera.megapixels), main = "Normalized Camera Resolution")
-abline(0,1, col = "red")
-qqnorm(scale(data$the.ram.gb), main = "Normalized RAM")
-abline(0,1, col = "red")
-qqnorm(scale(data$the.standby.hours), main = "Normalized Stand-by Hours")
-abline(0,1, col = "red")
-qqnorm(scale(data$the.weight.gram), main = "Normalized Weight")
-abline(0,1, col = "red")
-qqnorm(scale(data$the.screen2body.percent), main = "Normalized Screen-to-Body Ratio")
-abline(0,1, col = "red")
+printCorr <- function(){
+  df.new <- data[,c(162,165,168:171)]
+  names(df.new)
+  names(df.new) <- c("var1", "var2", "var3", "var4", "var5", "var6")
+  cor(df.new, use = "pairwise.complete.obs", method = "spearman") %>% 
+    xtable::xtable(digits = 4)
+}
 
-ks.test(scale(data$the.camera.megapixels), pnorm)
-ks.test(scale(data$the.ram.gb), pnorm)
-ks.test(scale(data$the.standby.hours), pnorm)
-ks.test(scale(data$the.weight.gram), pnorm)
-ks.test(scale(data$the.screen2body.percent), pnorm)
+plotNrintNormal <- function(){
+  par(mfrow = c(4,2))
+  qqnorm(rnorm(8020), main = "Theoretical normal distribution")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.total.pixels), main = "Normalized Camera Resolution")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.camera.megapixels), main = "Normalized Camera Resolution")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.ram.gb), main = "Normalized RAM")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.standby.hours), main = "Normalized Stand-by Hours")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.weight.gram), main = "Normalized Weight")
+  abline(0,1, col = "red")
+  qqnorm(scale(data$the.screen2body.percent), main = "Normalized Screen-to-Body Ratio")
+  abline(0,1, col = "red")
+  
+  ks.test(scale(data$the.camera.megapixels), pnorm)
+  ks.test(scale(data$the.ram.gb), pnorm)
+  ks.test(scale(data$the.standby.hours), pnorm)
+  ks.test(scale(data$the.weight.gram), pnorm)
+  ks.test(scale(data$the.screen2body.percent), pnorm)
+  ks.test(scale(data$the.total.pixels), pnorm)
+}
+
+printSummary <- function(){
+  summary(data[,c(162,165,168:171)])
+}
+
+printInfo <- function(){
+  df <- data[,162:171]
+  df.new <- data.frame(description = "integer",
+                       variable.name = colnames(df),
+                       available.cases = 0,
+                       percent = 0,
+                       explanation = "hello")
+  
+  for (i in 1:ncol(df)) {
+    n <- sum(complete.cases(df[,i]))
+    df.new$available.cases[i] <- n 
+    df.new$percent[i] <- n / nrow(df)
+  }
+  
+  xtable::xtable(df.new)
+  
+}
+
 
 
 # Network Graphs ----------------------------------------------------------
@@ -217,22 +245,3 @@ saveDatasets <- function(){
   dbWriteTable(con, "mobile", data, overwrite = T)
 }
 
-
-# others ------------------------------------------------------------------
-
-summary(data[,169:171]) %>% xtable::xtable()
-
-df <- data[,162:171]
-df.new <- data.frame(description = "integer",
-                     variable.name = colnames(df),
-                     available.cases = 0,
-                     percent = 0,
-                     explanation = "hello")
-
-for (i in 1:ncol(df)) {
-  n <- sum(complete.cases(df[,i]))
-  df.new$available.cases[i] <- n 
-  df.new$percent[i] <- n / nrow(df)
-}
-
-xtable::xtable(df.new)
