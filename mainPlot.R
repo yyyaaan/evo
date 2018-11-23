@@ -6,8 +6,6 @@ data <- readRDS("dataOK.rds")
 # ok plot are masked in function
 # RColorBrewer::display.brewer.all()
 
-# pendings ----------------------------------------------------------------
-
 
 
 # verbatim output ---------------------------------------------------------
@@ -70,6 +68,18 @@ printInfo <- function(){
 
 
 # Network Graphs ----------------------------------------------------------
+
+plotFeedbackLoop <- function(){
+  label <- c("Feedback Loop", "Diffusion of Technology", "Adaptation of Agents", 
+             "Evolution of Networks/Clusters", "Co-evolution of Industry")
+  nodes <- data.frame(id = 1:length(label),
+                      label = label,
+                      shape = c("star",rep("box",4)))
+  edges <- data.frame(from = c(1,1,1,1,2,3,4),
+                      to   = c(2,3,4,5,3,4,5),
+                      shape = "text")
+  visNetwork(nodes, edges)
+}
 
 plotNetwork <- function(){
   nodes <- data$the.systemchip.brand %>% as.character() %>%
